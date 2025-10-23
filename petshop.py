@@ -46,23 +46,36 @@ while i != 0:
 
     if op == 2:
         print('------------------')
-        login = input('Insira seu nome de usuario: ')
+        nome = input('Insira seu nome de usuario: ')
         senha = input('Insira sua senha: ')
 
 
-        if (login not in usuarios) and (senha not in usuarios):
-            print('-----------------------')
-            print('Usuário não cadastrado.')
+        #if (nome not in usuarios) and (senha not in usuarios):
+        #   print('-----------------------')
+        #   print('Usuário não cadastrado.')
              
 
-            for dados in usuarios:
-                if (login in dados) and (senha in dados):
-                    print('------------------')
-                    print('Acesso concedido')
-            
+        for dados in usuarios:
+            if (nome in adm) and (senha in adm):
+                print('------------------')
+                print('Acesso concedido')
+                print('------MENU DE ADMIN-----')
+                
+                
 
+        for dados in usuarios:
+            if (nome in cliente) and (senha in cliente):     
+                print('------------------')
+                print('Acesso concedido')
+                print('------MENU DE CLIENTE-----')
 
+        
+        #if (nome and senha) in adm:
+        #    print('Acesso concedido')
+        #    print('------MENU DE ADMIN-----')
 
-                else:     
-                    print('------------------')
-                    print('Acesso negado')
+                        
+        #   elif (nome and senha) in cliente:
+        #       print('Acesso concedido')
+        #      print('------MENU DE CLIENTE-----')
+                            
