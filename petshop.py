@@ -51,6 +51,7 @@ while i != 0:
 
 
         if (login not in usuarios) and (senha not in usuarios):
+            print('-----------------------')
             print('Usuário não cadastrado.')
              
 
