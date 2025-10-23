@@ -3,10 +3,8 @@ usuarios = []
 produtos = []
 servicos = []
 
-i = 99
-
 # Menu para cadastro ou Login de usuario
-while i != 0:
+while True:
     print('---MENU---')
     print('1- Cadastro de usuário')
     print('2- Fazer login')
@@ -48,34 +46,18 @@ while i != 0:
         print('------------------')
         nome = input('Insira seu nome de usuario: ')
         senha = input('Insira sua senha: ')
-
-
-        #if (nome not in usuarios) and (senha not in usuarios):
-        #   print('-----------------------')
-        #   print('Usuário não cadastrado.')
-             
-
-        for dados in usuarios:
-            if (nome in adm) and (senha in adm):
-                print('------------------')
-                print('Acesso concedido')
-                print('------MENU DE ADMIN-----')
-                
-                
-
-        for dados in usuarios:
-            if (nome in cliente) and (senha in cliente):     
-                print('------------------')
-                print('Acesso concedido')
-                print('------MENU DE CLIENTE-----')
-
         
-        #if (nome and senha) in adm:
-        #    print('Acesso concedido')
-        #    print('------MENU DE ADMIN-----')
+        if (nome and senha) not in usuarios:
+            print('------------------')
+            print('Usuário não cadastrado ou Login Inválido')
+            print('------------------')
 
-                        
-        #   elif (nome and senha) in cliente:
-        #       print('Acesso concedido')
-        #      print('------MENU DE CLIENTE-----')
-                            
+        elif (nome and senha) in usuarios[0]:    
+            print('------------------')
+            print('Acesso concedido')
+            print('------MENU DE ADM-----')
+
+        elif (nome and senha) in usuarios[1]:    
+            print('------------------')
+            print('Acesso concedido')
+            print('------MENU DE CLIENTE-----')
