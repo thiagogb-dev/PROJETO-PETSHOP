@@ -1,8 +1,8 @@
-import funcoes_verificar as fv
-usuarios = [['CLIENTE', 'TH', 'TH123'], ['ADMIN', 'PP', 'PP123'], ['CLIENTE', 'JJ', 'JJ123']]
-produtos = [['REMÉDIO', 'REMÉDIO PARA CARRAPATO', 10, 5.00], ['COLEIRA', 'PARA ELE NÃO DESGRUDAR DE VOCÊ', 20, 8.00],
-            ['RAÇÃO', 'RAÇÃO PETSERTÃO', 40, 10.00], ['SACHÊ DE RAÇÃO', 'PEQUENO SACO DE RAÇÃO', 13, 4.00]]
-servicos = [['BANHO', 'UM BANHO REFRESCANTE PRO SEU PET', 20.00, []], ['TOSA', 'APARAGEM DE PELO', 30.00, []]]
+import funcoes
+
+usuarios = []
+produtos = []
+servicos = []
 historico_p = []
 historico_s = []
 satisfacao = []
@@ -12,7 +12,8 @@ while True:
     print('---CADASTRE-SE OU FAÇA LOGIN PARA CONTINUAR---')
     print('1- Cadastro de usuário')
     print('2- Fazer login')
-    print('3- Sair')
+    print('3- Importar')
+    print('4- Sair')
 
     op = int(input('Qual sua opção?: '))
 
@@ -23,10 +24,8 @@ while True:
             identificacao = input('Esse cadastro é para um ADMIN ou CLIENTE? ').upper()
 
             if identificacao == 'ADMIN' or identificacao == 'CLIENTE':
-                nome = input('Insira seu nome de usuário: ').upper()
-                print('A senha deve conter mais de 6 caracteres.')
+                nome = input('Insira seu nome de usuario: ').upper()
                 senha = input('Insira sua senha: ').upper()
-                fv.verificar_senha(senha)
                 usuarios.append([identificacao, nome, senha])
                 print('------------------')
                 print('Cadastro Concluido!')
@@ -58,12 +57,10 @@ while True:
                 print('2- Buscar Produtos/Serviços')
                 print('3- Remover Produtos/Serviços')
                 print('4- Alterar Produtos/Serviços')
-                print('5- Avaliações de Satisfações')
-                print('6- Relatório de Vendas')
-                print('7- Salvar Dados')
-                print('8- Importar Dados')
-                print('9- Listar Dados')
-                print('0- Voltar para o Menu Principal')
+                print('5- Avaliações de satisfações')
+                print('6- Relatório de vendas')
+                print('7- Salvar listas um arquivo')
+                print('8- Voltar para o Menu Principal')
                 print('------------------')
                 op = int(input('Qual sua opção?: '))
 
@@ -233,7 +230,8 @@ while True:
                                 f'PRODUTO: {produtos[ind][0]} | DESCRIÇÃO: {produtos[ind][1]} | QUANTIDADE: {produtos[ind][2]} | PREÇO: R${produtos[ind][3]}')
 
                             novo_nome_produto = input('Novo NOME (ou pressione Enter para manter o nome): ').upper()
-                            nova_desc_produto = input( 'Nova DESCRIÇÃO (ou pressione Enter para manter a descrição): ').upper()
+                            nova_desc_produto = input(
+                                'Nova DESCRIÇÃO (ou pressione Enter para manter a descrição): ').upper()
                             nova_qtde_produto = input('Nova QUANTIDADE (ou pressione Enter para manter a quantidade): ')
                             novo_preco_produto = input('Novo PREÇO (ou pressione Enter para manter o preço): ')
                             if novo_nome_produto != '':
@@ -321,82 +319,18 @@ while True:
                     print('3- Serviços')
                     print('------------------')
 
-                    perg = int(input('Digite sua opção: ').upper())
+                    op = input('Digite sua opção: ')
 
-                    if perg == 1:
-                        print('Salvando arquivos...')
-                        arquivo = open('usuarios.txt', 'w')
-                        for u in usuarios:
-                            arquivo.write(u[0] + ' - ' + u[1] + ' - ' + u[2] + '\n')
-                        arquivo.close()
-                        print('Lista salva com êxito')
+                    if op == '1':
+                        funcoes.lista_user(usuarios)
 
-                    elif perg == 2:
-                        print('Salvando arquivos...')
-                        arquivo = open('usuarios.txt', 'w')
-                        for p in produtos:
-                            arquivo.write(p[0] + ' - ' + p[1] + ' - ' + p[2] + '\n')
-                        arquivo.close()
-                        print('Lista salva com êxito')
+                    elif op == '2':
+                        funcoes.lista_prod(produtos)
 
-                    elif perg == 3:
-                        print('Salvando arquivos...')
-                        arquivo = open('usuarios.txt', 'w')
-                        for s in servicos:
-                            arquivo.write(s[0] + ' - ' + s[1] + ' - ' + s[2] + '\n')
-                        arquivo.close()
-                        print('Lista salva com êxito')
+                    elif op == '3':
+                        funcoes.lista_serv(servicos)
 
                 elif op == 8:
-                    print('------------------')
-                    print('O que você quer Importar?')
-                    print('1- Usuários')
-                    print('2- Produtos')
-                    print('3- Serviços')
-                    print('------------------')
-
-                    perg = int(input('Digite sua opção: ').upper())
-
-                    if perg == 1:
-                        print('Importando arquivos...')
-                        arq = open('usuarios.txt', 'r')
-                        linhas = arq.readlines()
-                        for l in linhas:
-                            dados = l.split(' - ')
-                            usuarios.append([dados[0], dados[1], dados[2].replace('\n','') ])
-                        arq.close()
-                        print('Lista importada com êxito')
-
-                    elif perg == 2:
-                        print('Importando arquivos...')
-                        arq = open('produtos.txt', 'r')
-                        linhas = arq.readlines()
-                        for l in linhas:
-                            dados = l.split(' - ')
-                            produtos.append([dados[0], dados[1], dados[2].replace('\n','') ])
-                        arq.close()
-                        print('Lista importada com êxito')
-
-
-                    elif perg == 3:
-                        print('Importando arquivos...')
-                        arq = open('servicos.txt', 'r')
-                        linhas = arq.readlines()
-                        for l in linhas:
-                            dados = l.split(' - ')
-                            servicos.append([dados[0], dados[1], dados[2].replace('\n','') ])
-                        arq.close()
-                        print('Lista importada com êxito')
-
-
-                elif op == 9:
-                    print('------------------')
-                    print(f'Usuários: {usuarios}')
-                    print(f'Produtos: {produtos}')
-                    print(f'Serviços: {servicos}')
-                    print('------------------')
-
-                elif op == 0:
                     print('Saindo...')
                     break
 
@@ -434,11 +368,11 @@ while True:
                         if compra == p[0]:
                             encontrado = True
 
-                            if qtd <= p[2]:
+                            if qtd <= int(p[2]):
                                 valor = qtd * p[3]
-                                p[2] -= qtd
+                                p[2] = int(p[2]) - qtd
                                 print('------------------')
-                                print(f'Compra realizada! O valor da sua COMPRA foi: R${valor}')
+                                funcoes.janela_produto()
                                 print('Obrigado pela preferência!')
                                 print('------------------')
                                 historico_p.append([nome, compra, qtd, valor])
@@ -470,7 +404,7 @@ while True:
 
                     encontrado = False
                     for s in servicos:
-                        if servico == s[0]:
+                        if servico in s[0]:
                             encontrado = True
 
                             hora = input('Digite o horário (ex: 13h): ')
@@ -479,9 +413,8 @@ while True:
                                 print('------------------')
                                 s[3].append(hora)
                                 preco = s[2]
-                                print(f'Serviço Agendado! o valor foi: R${preco}')
+                                funcoes.janela_servico()
                                 historico_s.append([nome, servico, hora, preco])
-                                print('------------------')
 
                             else:
                                 print('------------------')
@@ -571,9 +504,29 @@ while True:
 
     elif op == 3:
         print('------------------')
+        print('O que você quer Importar?')
+        print('1- Usuários')
+        print('2- Produtos')
+        print('3- Serviços')
+        print('------------------')
+
+        op = input('Digite sua opção: ')
+
+        if op == '1':
+            funcoes.importar_user(usuarios)
+
+        elif op == '2':
+            funcoes.importar_prod(produtos)
+
+        elif op == '3':
+            funcoes.importar_serv(servicos)
+
+    elif op == 4:
+        print('------------------')
         print('Saindo...')
         print('------------------')
         break
+
 
     else:
         print('------------------')
